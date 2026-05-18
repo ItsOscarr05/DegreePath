@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Dark navy is the default surface; the entire app reads as a calm,
+       organized productivity tool. Gold = warm primary highlights,
+       compass-needle red = high-intent "north" accent. */
+    --background: 222 47% 8%;
+    --foreground: 210 40% 96%;
+
+    --card: 222 45% 11%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 222 45% 11%;
+    --popover-foreground: 210 40% 96%;
+
+    --primary: 43 78% 62%; /* soft gold */
+    --primary-foreground: 222 47% 10%;
+
+    --secondary: 222 30% 18%;
+    --secondary-foreground: 210 40% 96%;
+
+    --muted: 222 30% 16%;
+    --muted-foreground: 215 20% 70%;
+
+    --accent: 222 30% 18%;
+    --accent-foreground: 210 40% 96%;
+
+    --accent-gold: 43 78% 62%;
+    --accent-gold-foreground: 222 47% 10%;
+
+    --accent-north: 0 78% 58%; /* bright red, compass needle */
+    --accent-north-foreground: 0 0% 100%;
+
+    --destructive: 0 70% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 222 30% 20%;
+    --input: 222 30% 20%;
+    --ring: 43 78% 62%;
+
+    --radius: 0.625rem;
+
+    --font-sans:
+      ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html,
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+  }
+}
+
+@layer components {
+  .surface-card {
+    @apply rounded-xl border border-border/60 bg-card/70 backdrop-blur-sm shadow-sm;
+  }
+
+  .needle-bar {
+    @apply relative h-2 w-full overflow-hidden rounded-full bg-secondary;
+  }
+  .needle-bar > span {
+    @apply absolute inset-y-0 left-0 bg-gold;
+  }
+}

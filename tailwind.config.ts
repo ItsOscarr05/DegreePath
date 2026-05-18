@@ -52,6 +52,20 @@ const config: Config = {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
         },
+        stitch: {
+          bg: "#0a1226",
+          surface: "#0a1226",
+          surfaceContainer: "#141d3a",
+          surfaceContainerHigh: "#1d284f",
+          surfaceContainerHighest: "#283466",
+          onSurface: "#e3e6f2",
+          onSurfaceVariant: "#a8b2c9",
+          primary: "#ff535b",
+          primaryContainer: "#ff535b",
+          onPrimaryContainer: "#ffffff",
+          secondary: "#e9c349",
+          secondaryContainer: "#af8d11",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -60,6 +74,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
     },
   },

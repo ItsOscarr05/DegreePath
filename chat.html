@@ -1,0 +1,492 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>DegreePath — Advisor Chat</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+      .needle-line {
+        width: 2px;
+        background-color: #ff535b;
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #10131a;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #32353c;
+        border-radius: 10px;
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'surface-container-low': '#191c22',
+              'primary-fixed': '#ffdad8',
+              'outline-variant': '#5b403f',
+              'surface-container': '#1d2026',
+              'inverse-surface': '#e1e2eb',
+              'on-secondary-container': '#342800',
+              'on-tertiary': '#2a322b',
+              'surface-bright': '#363940',
+              tertiary: '#c0c9be',
+              outline: '#ab8987',
+              'primary-fixed-dim': '#ffb3b1',
+              'on-error': '#690005',
+              'surface-variant': '#32353c',
+              'primary-container': '#ff535b',
+              'on-secondary': '#3c2f00',
+              'surface-container-highest': '#32353c',
+              background: '#10131a',
+              'on-primary-container': '#5b000e',
+              'surface-tint': '#ffb3b1',
+              'on-primary-fixed': '#410007',
+              'on-primary-fixed-variant': '#92001c',
+              'on-error-container': '#ffdad6',
+              'on-secondary-fixed': '#241a00',
+              'inverse-on-surface': '#2e3037',
+              'tertiary-fixed': '#dce5d9',
+              'inverse-primary': '#bb152c',
+              'secondary-fixed-dim': '#e9c349',
+              'surface-dim': '#10131a',
+              'secondary-fixed': '#ffe088',
+              primary: '#ffb3b1',
+              'on-background': '#e1e2eb',
+              'on-tertiary-container': '#242c24',
+              'on-secondary-fixed-variant': '#574500',
+              'on-primary': '#680011',
+              'on-tertiary-fixed': '#161d16',
+              'on-surface-variant': '#e4bebc',
+              'tertiary-container': '#8a9389',
+              'error-container': '#93000a',
+              'surface-container-high': '#272a31',
+              surface: '#10131a',
+              'secondary-container': '#af8d11',
+              'on-tertiary-fixed-variant': '#404940',
+              error: '#ffb4ab',
+              'on-surface': '#e1e2eb',
+              'tertiary-fixed-dim': '#c0c9be',
+              'surface-container-lowest': '#0b0e14',
+              secondary: '#e9c349',
+            },
+            borderRadius: {
+              DEFAULT: '0.125rem',
+              lg: '0.25rem',
+              xl: '0.5rem',
+              full: '0.75rem',
+            },
+            spacing: {
+              sm: '16px',
+              'margin-desktop': '40px',
+              'margin-mobile': '16px',
+              gutter: '20px',
+              base: '4px',
+              lg: '48px',
+              xl: '80px',
+              xs: '8px',
+              md: '24px',
+            },
+            fontFamily: {
+              'headline-md': ['Inter'],
+              'body-lg': ['Inter'],
+              'label-md': ['JetBrains Mono'],
+              'body-md': ['Inter'],
+              'headline-xl': ['Inter'],
+              'headline-lg-mobile': ['Inter'],
+              'headline-lg': ['Inter'],
+            },
+            fontSize: {
+              'headline-md': ['24px', { lineHeight: '32px', fontWeight: '600' }],
+              'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+              'label-md': [
+                '12px',
+                { lineHeight: '16px', letterSpacing: '0.05em', fontWeight: '500' },
+              ],
+              'body-md': ['14px', { lineHeight: '20px', fontWeight: '400' }],
+              'headline-xl': [
+                '40px',
+                { lineHeight: '48px', letterSpacing: '-0.02em', fontWeight: '700' },
+              ],
+              'headline-lg-mobile': ['28px', { lineHeight: '34px', fontWeight: '600' }],
+              'headline-lg': [
+                '32px',
+                { lineHeight: '40px', letterSpacing: '-0.02em', fontWeight: '600' },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-background text-on-surface min-h-screen flex overflow-hidden">
+    <!-- Fixed Left Sidebar (Desktop Only for Layout Consistency) -->
+    <aside
+      class="hidden md:flex flex-col w-64 h-screen border-r border-white/10 bg-surface-container-lowest shrink-0"
+    >
+      <div class="px-md py-lg">
+        <div class="flex items-center gap-xs">
+          <span
+            class="material-symbols-outlined text-primary"
+            style="font-variation-settings: 'FILL' 1"
+            >explore</span
+          >
+          <span class="font-headline-md text-headline-md tracking-tight text-primary"
+            >DegreePath</span
+          >
+        </div>
+      </div>
+      <nav class="flex-1 px-sm space-y-xs">
+        <!-- Dashboard -->
+        <a
+          class="flex items-center gap-sm px-sm py-xs rounded text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all group"
+          href="#"
+        >
+          <span class="material-symbols-outlined">dashboard</span>
+          <span class="font-label-md text-label-md">Dashboard</span>
+        </a>
+        <!-- Checklist (Mapped to Completed courses) -->
+        <a
+          class="flex items-center gap-sm px-sm py-xs rounded text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all group"
+          href="#"
+        >
+          <span class="material-symbols-outlined">fact_check</span>
+          <span class="font-label-md text-label-md">Checklist</span>
+        </a>
+        <!-- Roadmap -->
+        <a
+          class="flex items-center gap-sm px-sm py-xs rounded text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all group"
+          href="#"
+        >
+          <span class="material-symbols-outlined">explore_off</span>
+          <span class="font-label-md text-label-md">Roadmap</span>
+        </a>
+        <!-- Advisor (Active State per logic) -->
+        <a
+          class="flex items-center gap-sm px-sm py-xs rounded bg-primary-container/10 text-primary transition-all border-r-2 border-primary"
+          href="#"
+        >
+          <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1"
+            >forum</span
+          >
+          <span class="font-label-md text-label-md">Advisor</span>
+        </a>
+      </nav>
+      <div class="p-md space-y-md border-t border-white/5">
+        <div class="flex items-center gap-sm">
+          <div
+            class="w-xs h-xs rounded-full bg-secondary shadow-[0_0_8px_rgba(233,195,73,0.4)]"
+          ></div>
+          <div class="flex-1 overflow-hidden">
+            <p class="font-body-md text-body-md truncate">oscar.b@univ.edu</p>
+          </div>
+        </div>
+        <button
+          class="w-full flex items-center justify-center gap-xs px-sm py-xs border border-white/10 rounded font-label-md text-label-md text-on-surface-variant hover:bg-white/5 transition-all"
+        >
+          <span class="material-symbols-outlined text-[18px]">logout</span>
+          Sign out
+        </button>
+      </div>
+    </aside>
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col h-screen relative bg-background">
+      <!-- Top Sticky Header (Glassmorphism) -->
+      <header
+        class="h-16 flex items-center justify-between px-md bg-surface/80 backdrop-blur-md border-b border-white/10 sticky top-0 z-20"
+      >
+        <div class="flex items-center gap-sm">
+          <span class="md:hidden material-symbols-outlined text-on-surface">menu</span>
+          <div>
+            <h1 class="font-headline-md text-headline-md text-on-surface leading-none">
+              Advisor Chat
+            </h1>
+            <p class="font-label-md text-label-md text-on-surface-variant mt-1">
+              Ask quick planning questions.
+            </p>
+          </div>
+        </div>
+        <div class="flex items-center gap-md">
+          <div class="hidden sm:flex flex-col items-end">
+            <span class="font-label-md text-label-md text-secondary">Academic Progress: 65%</span>
+            <div class="w-32 h-1 bg-surface-container rounded-full mt-1 overflow-hidden">
+              <div class="h-full bg-secondary" style="width: 65%"></div>
+            </div>
+          </div>
+          <div
+            class="w-10 h-10 rounded-full bg-surface-container-highest border border-white/10 flex items-center justify-center overflow-hidden"
+          >
+            <img
+              alt="User Avatar"
+              class="w-full h-full object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCe27xea_kBqJVrahV7a_AMuCVnikPdC5m0_aojXiVAbSktn8vcZfOX6X4p7Zwz4TeWkp1lT01yehbIFK2fTwrx0kfBHCmyWtUi8n7lbDwAvcTEoftp0WStP9Ht9z3wRu5anHg5BtPwMVFmhosq0-kqni2LvYUF3Wz6bZ-SZZ1AOjLqIQwLXJi6KAAob5__d2kSq3ENzIwVH9l_y0zN0i00MgeQ6gBNkbu1hFy4Pvk5aipW_vUlJm_vVXx1esuR9O1wVWEBoal4hFA"
+            />
+          </div>
+        </div>
+      </header>
+      <!-- Chat Container -->
+      <div class="flex-1 overflow-y-auto px-md py-lg flex justify-center">
+        <div class="w-full max-w-4xl space-y-lg">
+          <!-- Initial Assistant Message -->
+          <div class="flex gap-md group">
+            <div class="shrink-0">
+              <div
+                class="w-10 h-10 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center"
+              >
+                <span
+                  class="material-symbols-outlined text-primary"
+                  style="font-variation-settings: 'FILL' 1"
+                  >auto_awesome</span
+                >
+              </div>
+            </div>
+            <div class="flex-1 space-y-sm">
+              <div class="flex items-baseline gap-xs">
+                <span class="font-headline-md text-body-md font-bold text-on-surface"
+                  >DegreePath Assistant</span
+                >
+                <span class="font-label-md text-label-md text-on-surface-variant opacity-60"
+                  >Just now</span
+                >
+              </div>
+              <div class="bg-surface-container p-md border border-white/5 rounded-xl space-y-md">
+                <p class="font-body-lg text-body-lg text-on-surface">
+                  Hello Oscar. I've analyzed your current transcripts and degree requirements. Based
+                  on your 65% completion rate, here is my assessment:
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-sm">
+                  <div
+                    class="bg-background/50 p-sm rounded border border-white/5 border-l-2 border-l-secondary"
+                  >
+                    <h4 class="font-label-md text-label-md text-secondary mb-xs">
+                      Next Strategic Milestone
+                    </h4>
+                    <p class="font-body-md text-body-md text-on-surface-variant">
+                      Complete CS 402: Advanced Algorithms to unlock 3 capstone electives.
+                    </p>
+                  </div>
+                  <div
+                    class="bg-background/50 p-sm rounded border border-white/5 border-l-2 border-l-primary"
+                  >
+                    <h4 class="font-label-md text-label-md text-primary mb-xs">
+                      Summer Suggestion
+                    </h4>
+                    <p class="font-body-md text-body-md text-on-surface-variant">
+                      Enrolling in MATH 301 online this summer would accelerate graduation by 1
+                      semester.
+                    </p>
+                  </div>
+                </div>
+                <div class="pt-sm space-y-xs">
+                  <p class="font-label-md text-label-md text-on-surface-variant italic opacity-70">
+                    Try asking about:
+                  </p>
+                  <div class="flex flex-wrap gap-xs">
+                    <button
+                      class="px-sm py-1.5 rounded-full border border-white/10 bg-surface-container-high text-on-surface-variant font-label-md text-label-md hover:bg-white/10 hover:border-white/20 transition-all"
+                    >
+                      "What classes should I take next semester?"
+                    </button>
+                    <button
+                      class="px-sm py-1.5 rounded-full border border-white/10 bg-surface-container-high text-on-surface-variant font-label-md text-label-md hover:bg-white/10 hover:border-white/20 transition-all"
+                    >
+                      "Can I graduate one semester early?"
+                    </button>
+                    <button
+                      class="px-sm py-1.5 rounded-full border border-white/10 bg-surface-container-high text-on-surface-variant font-label-md text-label-md hover:bg-white/10 hover:border-white/20 transition-all"
+                    >
+                      "What happens if I fail Calculus II?"
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center gap-xs text-on-surface-variant/40">
+                <span class="material-symbols-outlined text-[16px]">info</span>
+                <span class="font-label-md text-[10px] uppercase tracking-widest"
+                  >AI generated response. Verify with human advisor.</span
+                >
+              </div>
+            </div>
+          </div>
+          <!-- User Message -->
+          <div class="flex gap-md justify-end">
+            <div class="max-w-[80%] space-y-sm">
+              <div class="bg-primary p-md rounded-xl text-on-primary shadow-lg shadow-primary/10">
+                <p class="font-body-lg text-body-lg">
+                  Can you check if I've met all the prerequisites for the Senior Design Project
+                  starting next Fall?
+                </p>
+              </div>
+              <div class="flex justify-end items-center gap-xs">
+                <span class="font-label-md text-label-md text-on-surface-variant opacity-60"
+                  >Delivered</span
+                >
+              </div>
+            </div>
+            <div class="shrink-0">
+              <div
+                class="w-10 h-10 rounded-full bg-surface-container-highest border border-white/20 flex items-center justify-center overflow-hidden"
+              >
+                <img
+                  alt="User Profile"
+                  class="w-full h-full object-cover"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeveShSthFbbwcpH8vsRUllPctSAGelc_hfHNjYOg9ge3XLE9gDAm5nlehsnakJngf_foQSnChCyocEfYeu3wx6ZUw8lFK2MhcH97uwlmg7p7LvPuToZFDssd74wiqpKFN8zoP3Un0W8gMz8ANKQVX1dXWqfS_nhaxMflId0TWb3cnciRinGZa310DiQD_oJO1UF_HEM_p6gzA00NC1R_iLs47ceCvrAXFSAPlQtcoK818QdVDd2_5TC3elAuvrflEmwAWxVVWogQ"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Sticky Chat Input pinned to bottom -->
+      <div
+        class="px-md pb-xl pt-md bg-gradient-to-t from-background via-background/95 to-transparent z-10"
+      >
+        <div class="max-w-4xl mx-auto relative group">
+          <div
+            class="absolute -inset-0.5 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-xl blur opacity-30 group-focus-within:opacity-100 transition duration-500"
+          ></div>
+          <div
+            class="relative bg-surface-container-high border border-white/10 rounded-xl p-xs flex items-center gap-xs shadow-2xl"
+          >
+            <button class="p-sm text-on-surface-variant hover:text-on-surface transition-colors">
+              <span class="material-symbols-outlined">attach_file</span>
+            </button>
+            <input
+              class="flex-1 bg-transparent border-none focus:ring-0 font-body-lg text-body-lg py-sm px-xs placeholder:text-on-surface-variant/40"
+              placeholder="Ask about your degree..."
+              type="text"
+            />
+            <button
+              class="bg-primary text-on-primary w-12 h-12 flex items-center justify-center rounded-lg hover:brightness-110 active:scale-95 transition-all"
+            >
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1"
+                >send</span
+              >
+            </button>
+          </div>
+          <p class="text-center font-label-md text-label-md text-on-surface-variant/40 mt-sm">
+            For official sequencing, substitutions, or appeals, contact your university advisor.
+          </p>
+        </div>
+      </div>
+    </main>
+    <!-- Mobile Navigation Shell (Bottom) -->
+    <nav
+      class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm pb-safe bg-surface border-t border-white/10"
+    >
+      <a
+        class="flex flex-col items-center justify-center text-on-surface-variant hover:text-on-surface transition-transform active:scale-90"
+        href="#"
+      >
+        <span class="material-symbols-outlined">dashboard</span>
+        <span class="font-label-md text-label-md">Dashboard</span>
+      </a>
+      <a
+        class="flex flex-col items-center justify-center text-on-surface-variant hover:text-on-surface transition-transform active:scale-90"
+        href="#"
+      >
+        <span class="material-symbols-outlined">fact_check</span>
+        <span class="font-label-md text-label-md">Checklist</span>
+      </a>
+      <a
+        class="flex flex-col items-center justify-center text-on-surface-variant hover:text-on-surface transition-transform active:scale-90"
+        href="#"
+      >
+        <span class="material-symbols-outlined">explore_off</span>
+        <span class="font-label-md text-label-md">Roadmap</span>
+      </a>
+      <a
+        class="flex flex-col items-center justify-center text-primary bg-primary-container/10 rounded-full px-4 py-1 transition-transform active:scale-90"
+        href="#"
+      >
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1"
+          >forum</span
+        >
+        <span class="font-label-md text-label-md">Advisor</span>
+      </a>
+    </nav>
+    <!-- Contextual "North Needle" Progress Sidebar (Hidden on small screens) -->
+    <aside
+      class="hidden xl:flex flex-col w-80 h-screen border-l border-white/10 bg-surface-container-lowest p-md space-y-lg overflow-y-auto"
+    >
+      <h3 class="font-headline-md text-body-md font-bold text-on-surface uppercase tracking-widest">
+        Degree Status
+      </h3>
+      <div class="space-y-md">
+        <div class="flex justify-between items-end">
+          <span class="font-label-md text-label-md text-on-surface-variant"
+            >Bachelor of Science, CS</span
+          >
+          <span class="font-label-md text-label-md text-secondary">78 / 120 Credits</span>
+        </div>
+        <div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+          <div class="h-full bg-secondary" style="width: 65%"></div>
+        </div>
+      </div>
+      <div class="space-y-sm">
+        <p class="font-label-md text-label-md text-on-surface-variant font-bold">
+          RECENTLY COMPLETED
+        </p>
+        <div class="space-y-xs">
+          <div
+            class="flex items-center gap-sm p-sm bg-surface-container/30 border border-white/5 rounded"
+          >
+            <span class="font-label-md text-label-md text-secondary">CS 301</span>
+            <div class="flex-1">
+              <p class="font-body-md text-body-md leading-tight">Database Systems</p>
+            </div>
+            <span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+          </div>
+          <div
+            class="flex items-center gap-sm p-sm bg-surface-container/30 border border-white/5 rounded"
+          >
+            <span class="font-label-md text-label-md text-secondary">ENG 202</span>
+            <div class="flex-1">
+              <p class="font-body-md text-body-md leading-tight">Technical Writing</p>
+            </div>
+            <span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="bg-surface p-md rounded border border-white/10 space-y-md relative overflow-hidden"
+      >
+        <div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
+        <p class="font-label-md text-label-md text-primary font-bold">ADVISOR NOTES</p>
+        <p class="font-body-md text-body-md text-on-surface-variant">
+          "Oscar, remember to submit your 'Intent to Graduate' form by October 15th if you plan for
+          a Spring completion."
+        </p>
+        <div class="flex items-center gap-sm">
+          <img
+            class="w-8 h-8 rounded-full border border-white/10"
+            data-alt="A portrait of a professional academic advisor in a modern, well-lit office with shelves of books in the background. The lighting is soft and warm, highlighting a welcoming and expert demeanor. The overall aesthetic is minimalist and scholarly with deep monochromatic tones and subtle high-intent red accents."
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuChIKZPpCOpsSkk77j27IX0HriLwKhzJxPg87PZaiHt6fmtKQj_6UxRWVpAOamcoh4tdR1b7aA4leYRE-8jsvcPjacJyZMxeuJ0XCdXtxxDUNG2r26Tib267LypgbsbByvocrNHgtYyLcp8bkP-M9ARMgoCj2ax59n5RYFBZBsStYjBEw7gWJOGWFuEvvUcSTKRvDY8D_uv7g2ENhTXydemG1fsxDr8F3IrOBTDYPlufEE_W3hHBi6-rZsgkG81_w7rA8H4AZ0G4Ss"
+          />
+          <span class="font-label-md text-label-md">Sarah Jenkins, PhD</span>
+        </div>
+      </div>
+    </aside>
+  </body>
+</html>

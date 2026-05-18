@@ -15,5 +15,10 @@ export default async function AppLayout({
   if (!user) {
     redirect("/login");
   }
-  return <AppShell email={user.email ?? undefined}>{children}</AppShell>;
+  return <AppShell email={user.email ?? undefined} avatarUrl={getAvatarUrl(user)}>{children}</AppShell>;
+}
+
+function getAvatarUrl(user: { user_metadata?: Record<string, unknown> }): string | null {
+  const raw = user.user_metadata?.avatar_url ?? user.user_metadata?.picture;
+  return typeof raw === "string" && raw.length > 0 ? raw : null;
 }

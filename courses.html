@@ -1,0 +1,464 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Course Checklist - DegreePath</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #10131a;
+        color: #e1e2eb;
+        font-family: 'Inter', sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+      .needle-active {
+        position: relative;
+      }
+      .needle-active::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 4px;
+        bottom: 4px;
+        width: 2px;
+        background-color: #ffb3b1;
+      }
+      .glass-header {
+        background: rgba(16, 19, 26, 0.8);
+        backdrop-filter: blur(12px);
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'surface-container-low': '#191c22',
+              'primary-fixed': '#ffdad8',
+              'outline-variant': '#5b403f',
+              'surface-container': '#1d2026',
+              'inverse-surface': '#e1e2eb',
+              'on-secondary-container': '#342800',
+              'on-tertiary': '#2a322b',
+              'surface-bright': '#363940',
+              tertiary: '#c0c9be',
+              outline: '#ab8987',
+              'primary-fixed-dim': '#ffb3b1',
+              'on-error': '#690005',
+              'surface-variant': '#32353c',
+              'primary-container': '#ff535b',
+              'on-secondary': '#3c2f00',
+              'surface-container-highest': '#32353c',
+              background: '#10131a',
+              'on-primary-container': '#5b000e',
+              'surface-tint': '#ffb3b1',
+              'on-primary-fixed': '#410007',
+              'on-primary-fixed-variant': '#92001c',
+              'on-error-container': '#ffdad6',
+              'on-secondary-fixed': '#241a00',
+              'inverse-on-surface': '#2e3037',
+              'tertiary-fixed': '#dce5d9',
+              'inverse-primary': '#bb152c',
+              'secondary-fixed-dim': '#e9c349',
+              'surface-dim': '#10131a',
+              'secondary-fixed': '#ffe088',
+              primary: '#ffb3b1',
+              'on-background': '#e1e2eb',
+              'on-tertiary-container': '#242c24',
+              'on-secondary-fixed-variant': '#574500',
+              'on-primary': '#680011',
+              'on-tertiary-fixed': '#161d16',
+              'on-surface-variant': '#e4bebc',
+              'tertiary-container': '#8a9389',
+              'error-container': '#93000a',
+              'surface-container-high': '#272a31',
+              surface: '#10131a',
+              'secondary-container': '#af8d11',
+              'on-tertiary-fixed-variant': '#404940',
+              error: '#ffb4ab',
+              'on-surface': '#e1e2eb',
+              'tertiary-fixed-dim': '#c0c9be',
+              'surface-container-lowest': '#0b0e14',
+              secondary: '#e9c349',
+            },
+            borderRadius: {
+              DEFAULT: '0.125rem',
+              lg: '0.25rem',
+              xl: '0.5rem',
+              full: '0.75rem',
+            },
+            spacing: {
+              sm: '16px',
+              'margin-desktop': '40px',
+              'margin-mobile': '16px',
+              gutter: '20px',
+              base: '4px',
+              lg: '48px',
+              xl: '80px',
+              xs: '8px',
+              md: '24px',
+            },
+            fontFamily: {
+              'headline-md': ['Inter'],
+              'body-lg': ['Inter'],
+              'label-md': ['JetBrains Mono'],
+              'body-md': ['Inter'],
+              'headline-xl': ['Inter'],
+              'headline-lg-mobile': ['Inter'],
+              'headline-lg': ['Inter'],
+            },
+            fontSize: {
+              'headline-md': ['24px', { lineHeight: '32px', fontWeight: '600' }],
+              'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+              'label-md': [
+                '12px',
+                { lineHeight: '16px', letterSpacing: '0.05em', fontWeight: '500' },
+              ],
+              'body-md': ['14px', { lineHeight: '20px', fontWeight: '400' }],
+              'headline-xl': [
+                '40px',
+                { lineHeight: '48px', letterSpacing: '-0.02em', fontWeight: '700' },
+              ],
+              'headline-lg-mobile': ['28px', { lineHeight: '34px', fontWeight: '600' }],
+              'headline-lg': [
+                '32px',
+                { lineHeight: '40px', letterSpacing: '-0.02em', fontWeight: '600' },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-background text-on-background min-h-screen flex">
+    <!-- Sidebar Navigation (Desktop) -->
+    <aside
+      class="hidden md:flex flex-col w-64 border-r border-white/10 h-screen sticky top-0 p-sm gap-lg bg-surface"
+    >
+      <div class="flex items-center gap-xs px-xs">
+        <span
+          class="material-symbols-outlined text-primary"
+          style="font-variation-settings: 'FILL' 1"
+          >explore</span
+        >
+        <span class="font-headline-md text-headline-md tracking-tight text-primary"
+          >DegreePath</span
+        >
+      </div>
+      <nav class="flex flex-col gap-xs flex-1">
+        <a
+          class="flex items-center gap-sm px-xs py-xs text-on-surface-variant hover:text-primary transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">dashboard</span>
+          <span class="font-body-md text-body-md">Dashboard</span>
+        </a>
+        <a
+          class="needle-active flex items-center gap-sm px-xs py-xs text-on-surface font-bold"
+          href="#"
+        >
+          <span class="material-symbols-outlined ml-base">fact_check</span>
+          <span class="font-body-md text-body-md">Checklist</span>
+        </a>
+        <a
+          class="flex items-center gap-sm px-xs py-xs text-on-surface-variant hover:text-primary transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">explore_off</span>
+          <span class="font-body-md text-body-md">Roadmap</span>
+        </a>
+        <a
+          class="flex items-center gap-sm px-xs py-xs text-on-surface-variant hover:text-primary transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">history_edu</span>
+          <span class="font-body-md text-body-md">Courses</span>
+        </a>
+        <a
+          class="flex items-center gap-sm px-xs py-xs text-on-surface-variant hover:text-primary transition-colors duration-200"
+          href="#"
+        >
+          <span class="material-symbols-outlined">forum</span>
+          <span class="font-body-md text-body-md">Advisor</span>
+        </a>
+      </nav>
+      <div class="mt-auto flex flex-col gap-sm">
+        <div class="flex items-center gap-sm p-xs border border-white/5 rounded-lg">
+          <img
+            alt="User Profile"
+            class="w-8 h-8 rounded-full"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwwi-eNV1Ihm9owJPnrh1En66sxVKsij27gP72EfDIUuYoZdGJ4WNshGlYCG-fKG3xBjwmEbtIgXPB_gPDR50RWnOBxrWfRn6E_N9wNrbsiTWAj3Px6IAKrd5u2E6TVwLzAvx5XxvkXlucvC0OEevSxLo7H7-xSXj8JAkJXFK02lrrqWJjmTGiOH3awXcBGVwJKTo2iuq6jJpBYblmFzbFSrRaxvwZ8kmjuEw8EU4iGNXyAvyQ-lpIrxtlheKOePRL0LrI2wgpWmY"
+          />
+          <div class="flex flex-col overflow-hidden">
+            <span class="font-label-md text-label-md truncate text-on-surface"
+              >oscar.b@university.edu</span
+            >
+            <span class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold"
+              >Senior</span
+            >
+          </div>
+        </div>
+        <button
+          class="flex items-center justify-center gap-xs w-full py-xs border border-white/10 hover:bg-surface-variant transition-colors text-on-surface-variant"
+        >
+          <span class="material-symbols-outlined text-sm">logout</span>
+          <span class="font-label-md text-label-md">Sign out</span>
+        </button>
+      </div>
+    </aside>
+    <!-- Main Content Canvas -->
+    <main
+      class="flex-1 min-w-0 max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop py-md pb-xl"
+    >
+      <!-- Header Section -->
+      <header class="mb-lg">
+        <h1 class="font-headline-xl text-headline-xl mb-xs">Course Checklist</h1>
+        <p class="text-on-surface-variant font-body-lg text-body-lg max-w-2xl">
+          Track your progress towards graduation. We've mapped your requirements for
+          <span class="text-secondary font-bold">Virginia Tech — Computer Science, BS</span>.
+        </p>
+      </header>
+      <!-- Bento Grid Overview -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-md mb-xl">
+        <!-- CS Core Card -->
+        <div class="bg-surface-container border border-white/5 p-md flex flex-col gap-md">
+          <div class="flex justify-between items-start">
+            <div class="flex flex-col">
+              <span
+                class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest"
+                >Requirement</span
+              >
+              <h3 class="font-headline-md text-headline-md">CS Core</h3>
+            </div>
+            <span
+              class="material-symbols-outlined text-secondary"
+              style="font-variation-settings: 'FILL' 1"
+              >terminal</span
+            >
+          </div>
+          <div class="space-y-xs">
+            <div class="flex justify-between font-label-md text-label-md">
+              <span>Progress</span>
+              <span>42 / 56 Credits</span>
+            </div>
+            <div class="w-full h-1 bg-surface-container-highest">
+              <div class="h-full bg-secondary" style="width: 75%"></div>
+            </div>
+          </div>
+          <div class="mt-auto flex gap-xs">
+            <span class="px-xs py-1 bg-white/5 rounded-full font-label-md text-[10px] text-tertiary"
+              >14 Credits Left</span
+            >
+          </div>
+        </div>
+        <!-- Math & Science Card -->
+        <div class="bg-surface-container border border-white/5 p-md flex flex-col gap-md">
+          <div class="flex justify-between items-start">
+            <div class="flex flex-col">
+              <span
+                class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest"
+                >Requirement</span
+              >
+              <h3 class="font-headline-md text-headline-md">Math &amp; Science</h3>
+            </div>
+            <span
+              class="material-symbols-outlined text-secondary"
+              style="font-variation-settings: 'FILL' 1"
+              >functions</span
+            >
+          </div>
+          <div class="space-y-xs">
+            <div class="flex justify-between font-label-md text-label-md">
+              <span>Progress</span>
+              <span>12 / 24 Credits</span>
+            </div>
+            <div class="w-full h-1 bg-surface-container-highest">
+              <div class="h-full bg-secondary" style="width: 50%"></div>
+            </div>
+          </div>
+          <div class="mt-auto flex gap-xs">
+            <span class="px-xs py-1 bg-white/5 rounded-full font-label-md text-[10px] text-tertiary"
+              >12 Credits Left</span
+            >
+          </div>
+        </div>
+        <!-- Electives Card -->
+        <div class="bg-surface-container border border-white/5 p-md flex flex-col gap-md">
+          <div class="flex justify-between items-start">
+            <div class="flex flex-col">
+              <span
+                class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest"
+                >Requirement</span
+              >
+              <h3 class="font-headline-md text-headline-md">Electives</h3>
+            </div>
+            <span
+              class="material-symbols-outlined text-secondary"
+              style="font-variation-settings: 'FILL' 1"
+              >category</span
+            >
+          </div>
+          <div class="space-y-xs">
+            <div class="flex justify-between font-label-md text-label-md">
+              <span>Progress</span>
+              <span>9 / 18 Credits</span>
+            </div>
+            <div class="w-full h-1 bg-surface-container-highest">
+              <div class="h-full bg-secondary" style="width: 50%"></div>
+            </div>
+          </div>
+          <div class="mt-auto flex gap-xs">
+            <span class="px-xs py-1 bg-white/5 rounded-full font-label-md text-[10px] text-tertiary"
+              >9 Credits Left</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-xl">
+        <!-- Add Course Form -->
+        <section class="lg:col-span-5">
+          <div class="sticky top-md">
+            <div class="mb-md">
+              <h2 class="font-headline-md text-headline-md">Add a course</h2>
+              <p class="text-on-surface-variant font-body-md text-body-md mt-xs">
+                Record your academic history to update your roadmap.
+              </p>
+            </div>
+            <div class="bg-surface-container border border-white/5 p-md space-y-md">
+              <div class="space-y-xs">
+                <label class="font-label-md text-label-md text-on-surface-variant"
+                  >Course code</label
+                >
+                <input
+                  class="w-full bg-background border border-white/10 focus:border-secondary transition-colors px-sm py-xs font-label-md text-on-surface placeholder:opacity-30"
+                  placeholder="e.g. CS 1114"
+                  type="text"
+                />
+              </div>
+              <div class="grid grid-cols-3 gap-sm">
+                <div class="space-y-xs">
+                  <label class="font-label-md text-label-md text-on-surface-variant">Credits</label>
+                  <input
+                    class="w-full bg-background border border-white/10 focus:border-secondary transition-colors px-sm py-xs font-label-md text-on-surface"
+                    placeholder="3"
+                    type="number"
+                  />
+                </div>
+                <div class="space-y-xs">
+                  <label class="font-label-md text-label-md text-on-surface-variant">Grade</label>
+                  <select
+                    class="w-full bg-background border border-white/10 focus:border-secondary transition-colors px-sm py-xs font-label-md text-on-surface"
+                  >
+                    <option>A</option>
+                    <option>B</option>
+                    <option>C</option>
+                    <option>D</option>
+                    <option>IP</option>
+                  </select>
+                </div>
+                <div class="space-y-xs">
+                  <label class="font-label-md text-label-md text-on-surface-variant">Term</label>
+                  <input
+                    class="w-full bg-background border border-white/10 focus:border-secondary transition-colors px-sm py-xs font-label-md text-on-surface"
+                    placeholder="Fall 24"
+                    type="text"
+                  />
+                </div>
+              </div>
+              <button
+                class="w-full bg-secondary text-on-secondary-container font-label-md text-label-md py-sm font-bold active:scale-95 transition-transform duration-150"
+              >
+                Add course
+              </button>
+              <div class="pt-sm border-t border-white/5">
+                <p class="text-[11px] text-center text-on-surface-variant">
+                  Need to change your program?
+                  <a class="text-secondary hover:underline" href="#">Update your profile</a>.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Your Courses List -->
+        <section class="lg:col-span-7">
+          <div class="flex justify-between items-center mb-md">
+            <h2 class="font-headline-md text-headline-md">
+              Your courses
+              <span class="text-on-surface-variant font-normal opacity-50 ml-xs">(0)</span>
+            </h2>
+          </div>
+          <!-- Empty State -->
+          <div
+            class="bg-surface-container border border-white/5 border-dashed rounded-lg p-xl flex flex-col items-center justify-center text-center"
+          >
+            <div
+              class="w-16 h-16 bg-surface-container-highest rounded-full flex items-center justify-center mb-md"
+            >
+              <span class="material-symbols-outlined text-on-surface-variant text-3xl"
+                >auto_stories</span
+              >
+            </div>
+            <p class="text-on-surface-variant font-body-md text-body-md max-w-xs">
+              No courses yet. Add classes you have completed so we can compute your remaining
+              requirements.
+            </p>
+          </div>
+          <!-- Example Section (Hidden content for future scale) -->
+          <div class="mt-xl">
+            <img
+              alt="Academic Building"
+              class="w-full h-48 object-cover opacity-30 grayscale hover:grayscale-0 transition-all duration-700 rounded-lg"
+              data-alt="A wide angle shot of a historic gothic-style university building with ivy climbing its brick walls, set against a dramatic dark blue twilight sky. The architecture is sharp and detailed, illuminated by warm yellow light spilling from the windows, creating a scholarly and prestigious atmosphere that matches the deep navy and gold branding of the interface."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuASINVZMs3T7efACKO0lOBcBuzC1ZAANqZfQ2e6T0GiRXK6cFxtE1IM1GFX3g33uOccGvp7AZDElihjOaTT8QDyd_6Ep7iRM15O5mffK5N40_J4H4nL4F5JupTRmIy1ZNjauTM6u3ECAsC0Nyt9EodfnHlwq6NWdCt1A5UOsETqBXBC2bODl-Gwt6hNMOsjWrOiX2CxquwOER-jliRjk1529KTz81M1Qlap1H2rcBWPqsJO1QYwGAIM8gBdTwhT_h42jQaDmQuCY90"
+            />
+            <p
+              class="mt-xs text-[10px] uppercase tracking-[0.2em] text-on-surface-variant text-center"
+            >
+              Always verify with your official advisor.
+            </p>
+          </div>
+        </section>
+      </div>
+    </main>
+    <!-- Bottom Nav (Mobile Only) -->
+    <nav
+      class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-xs py-sm pb-safe bg-surface border-t border-white/10"
+    >
+      <div class="flex flex-col items-center justify-center text-on-surface-variant">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span class="font-label-md text-label-md">Dashboard</span>
+      </div>
+      <div
+        class="flex flex-col items-center justify-center text-primary bg-primary-container/10 rounded-full px-4 py-1"
+      >
+        <span class="material-symbols-outlined">fact_check</span>
+        <span class="font-label-md text-label-md">Checklist</span>
+      </div>
+      <div class="flex flex-col items-center justify-center text-on-surface-variant">
+        <span class="material-symbols-outlined">explore_off</span>
+        <span class="font-label-md text-label-md">Roadmap</span>
+      </div>
+      <div class="flex flex-col items-center justify-center text-on-surface-variant">
+        <span class="material-symbols-outlined">forum</span>
+        <span class="font-label-md text-label-md">Advisor</span>
+      </div>
+    </nav>
+  </body>
+</html>

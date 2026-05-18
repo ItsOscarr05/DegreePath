@@ -20,7 +20,7 @@ export function LoginForm({ redirect, initialError }: LoginFormProps) {
   const [error, setError] = useState<string | null>(initialError ?? null);
   const [pending, startTransition] = useTransition();
 
-  const target = redirect && redirect.startsWith("/") ? redirect : "/dashboard";
+  const target = redirect && redirect.startsWith("/") ? redirect : "/";
 
   async function handleEmailLogin(event: React.FormEvent) {
     event.preventDefault();

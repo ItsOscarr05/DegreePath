@@ -73,4 +73,15 @@
   .needle-bar > span {
     @apply absolute inset-y-0 left-0 bg-gold;
   }
+
+  .stitch-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .stitch-scrollbar::-webkit-scrollbar-track {
+    background: #0a1226;
+  }
+  .stitch-scrollbar::-webkit-scrollbar-thumb {
+    background: #283466;
+    border-radius: 10px;
+  }
 }
